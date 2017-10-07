@@ -20,7 +20,7 @@ if(isset($_SESSION["username"])){
                 if($row["activated"] == false){
                     if(isset($_POST["vc"])){
                         $sql = "SELECT validate FROM $tablename WHERE username = '$username'";
-                        echo $sql;
+                        //echo $sql;
                         $result2 = $connection->query($sql);
                         if($result2->num_rows > 0) {
                             while($row = $result2->fetch_assoc()){
