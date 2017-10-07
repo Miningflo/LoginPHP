@@ -17,13 +17,8 @@
                                                     if(this.readyState==4 && this.status==200)
                                                         {
                                                             var allowed = this.responseText;
-                                                            if(allowed == "false" && username != ""){
-                                                                document.getElementById("username").style = "box-shadow: 0 0 10px #00cc28;";
-                                                            }else if(allowed == "true" && username != ""){
-                                                                document.getElementById("username").style = "box-shadow: 0 0 10px #CC0000;";
-                                                            }else{
-                                                                document.getElementById("username").style = "";
-                                                            }
+                                                            console.log(this.responseText); 
+                                                            console.log(pw1); 
                                                             if(pw1 != "" && username != "" && allowed == "false")
                                                                 {
                                                                     document.getElementById("submit").disabled = false;
