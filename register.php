@@ -79,8 +79,8 @@
                 }
             else
                 {
-                    $sql="INSERT INTO $tablename (firstname, lastname, username, password) 
-                    VALUES ('$firstname', '$lastname', '$username', '$password')";
+                    $sql="INSERT INTO $tablename (firstname, lastname, username, password, activated) 
+                    VALUES ('$firstname', '$lastname', '$username', '$password', false)";
 
                      if ($connection->query($sql) === TRUE) {
                         echo "New record created successfully";

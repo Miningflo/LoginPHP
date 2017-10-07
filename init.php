@@ -17,6 +17,7 @@ firstname VARCHAR(30) NOT NULL,
 lastname VARCHAR(30) NOT NULL,
 username VARCHAR(30) NOT NULL,
 password VARCHAR(60) NOT NULL,
+activated BOOL NOT NULL,
 time TIMESTAMP
 )";
 $connection->query($sql);
