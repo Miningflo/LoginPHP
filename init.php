@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$DBname = "basedata";
+$DBname = "logindb";
 $tablename = "users";
 
 $connection = new mysqli($servername,$username,$password);
@@ -17,9 +17,17 @@ firstname VARCHAR(30) NOT NULL,
 lastname VARCHAR(30) NOT NULL,
 username VARCHAR(30) NOT NULL,
 password VARCHAR(60) NOT NULL,
+activated BOOL NOT NULL,
+validate INT(5) NOT NULL,
 time TIMESTAMP
 )";
-$connection->query($sql);
+//$connection->query($sql);
+
+if ($connection->query($sql) === TRUE) {
+    echo "Table created successfully";
+} else {
+    echo "Error creating table: " . $connection->error;
+}
 
 $connection->close();
 ?>

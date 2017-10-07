@@ -60,7 +60,7 @@
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $DBname = "basedata";
+        $DBname = "logindb";
         $tablename = "users";
         
         $connection = new mysqli($servername,$username,$password,$DBname);
@@ -79,8 +79,9 @@
                 }
             else
                 {
-                    $sql="INSERT INTO $tablename (firstname, lastname, username, password) 
-                    VALUES ('$firstname', '$lastname', '$username', '$password')";
+                    $sql="INSERT INTO $tablename (firstname, lastname, username, password, activated, validate) 
+                    VALUES ('$firstname', '$lastname', '$username', '$password', false, '" . rand(10000,99999) . "')";
+                echo $sql . "<br/>";
 
                      if ($connection->query($sql) === TRUE) {
                         echo "New record created successfully";

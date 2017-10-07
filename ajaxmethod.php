@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$DBname = "basedata";
+$DBname = "logindb";
 $tablename = "users";
         
 $connection = new mysqli($servername,$username,$password,$DBname);
