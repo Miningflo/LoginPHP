@@ -2,5 +2,6 @@
 A basic login script in Php
 Now with:
 - Color
-- Verification
-- Loads of patches
+- Verification / Secure validation
+- Loads of patches (commented "echo")
+- New databasename
