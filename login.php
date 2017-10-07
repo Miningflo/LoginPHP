@@ -49,7 +49,10 @@
     </head>
     <body>
         <?php
-        
+        session_start();
+        if(isset($_SESSION["username"])){
+            header("Location: profile.php");
+        }
         if(isset($_POST["password"]))
         {
         $servername = "localhost";
