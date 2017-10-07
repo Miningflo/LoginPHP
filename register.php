@@ -21,7 +21,13 @@
                                                     if(this.readyState==4 && this.status==200)
                                                         {
                                                             var allowed = this.responseText;
-                                                            console.log(this.responseText); 
+                                                            if(allowed == "true" && username != ""){
+                                                                document.getElementById("username").style = "box-shadow: 0 0 10px #00cc28;";
+                                                            }else if(allowed == "false" && username != ""){
+                                                                document.getElementById("username").style = "box-shadow: 0 0 10px #CC0000;";
+                                                            }else{
+                                                                document.getElementById("username").style = "";
+                                                            }
                                                             if(pw1==pw2 && pw1 != "" && firstname != "" && lastname != "" && username != "" && allowed == "true")
                                                                 {
                                                                     document.getElementById("submit").disabled = false;
