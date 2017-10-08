@@ -1,15 +1,33 @@
+<?php
+if(isset($_POST["username"])){
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $DBname = "logindb";
+    $tablename = "users";
+
+    $connection = new mysqli($servername,$username,$password,$DBname);
+    $username = $_POST["username"];
+    $sql = "SELECT email, resetkey FROM $tablename WHERE username = '$username' OR email = '$username'";
+    //echo $sql;
+    $result = $connection->query($sql);
+    if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+            echo "Send mail to: " . $row["email"] . "<br/>";
+            echo "http://localhost/Database2/reset.php?key=" . $row["resetkey"];
+        }
+    }else{
+        echo "I don't even understand all these errors anymore...";
+    }
+}else{
+    ?>
 <!DOCTYPE html>
 <html>
-    
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>login</title>
-        <link rel="stylesheet" href="login.css">
+        <title>Forgot Password</title>
         <script>
             function pwControll()
             {
-                var pw1 = document.getElementById("pw1").value;
                 var username = document.getElementById("username").value;
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function()
@@ -24,7 +42,7 @@
                                                             }else{
                                                                 document.getElementById("username").style = "";
                                                             }
-                                                            if(pw1 != "" && username != "" && allowed == false)
+                                                            if(username != "" && allowed == false)
                                                                 {
                                                                     document.getElementById("submit").disabled = false;
                                                                 }
@@ -37,71 +55,25 @@
                 
                 xmlhttp.open("GET","./ajaxmethod.php?username=" + username + "&email=" + username, true);
                 xmlhttp.send();
-            }
-            window.onload = function()
-            {
+        }
+        function isTrue(val){
+            return val == "true";
+        }
+        window.onload = function() {
                 if(document.body.contains(document.getElementById("submit")))
                    {
                         document.getElementById("submit").disabled = true;
                    }  
-            }
-        function isTrue(val){
-            return val == "true";
         }
         </script>
     </head>
     <body>
-        <?php
-        session_start();
-        if(isset($_SESSION["username"])){
-            header("Location: profile.php");
-        }
-        if(isset($_POST["password"]))
-        {
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $DBname = "logindb";
-        $tablename = "users";
-        
-        $connection = new mysqli($servername,$username,$password,$DBname);
-        
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-            
-            $sql="SELECT password FROM $tablename WHERE username = '$username' OR email = '$username'";
-            $result = $connection->query($sql);
-            if ($result->num_rows > 0)
-                {
-                    while ($row = $result->fetch_assoc())
-                    {
-                    if(password_verify($password, $row["password"]))
-                        {
-                            echo "login succesvol";
-                            session_start();
-                            $_SESSION["username"] = $username;
-                            header("Location: profile.php");
-                        }
-                    else
-                        {
-                            echo "wrong password !!!!";
-                        }
-                    }
-                }
-            else
-                {
-                    echo "this username doesn't exist";
-                }
-        }
-        else
-        {
-        ?>
-        <form action="login.php" method="post">
-        Username / Email: <input type="text" name="username" oninput="pwControll()" id="username"><br>
-        Password: <input type="password" name="password" oninput="pwControll()" id="pw1"><br>
-        <input type="submit" id="submit">
-        </form>
-        <a href="forgot.php">Forgot password?</a>
-        <?php } ?>
+        <form action="forgot.php" method="post">
+            Username / Email: <input type="text" name="username" oninput="pwControll()" id="username"><br>
+            <input type="submit" id="submit">
+         </form>
     </body>
 </html>
+    <?php
+}
+?>

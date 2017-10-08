@@ -40,6 +40,7 @@ if(isset($_SESSION["username"])){
                         ?>
                         <form action="profile.php" method="post">
                             Verificationcode: <input type="text" name="vc">
+                            <input type="submit">
                         </form>
                         <?php
                     }
@@ -54,9 +55,4 @@ if(isset($_SESSION["username"])){
     }else{
         header("Location: login.php");
     }
-
-
-
-
-
 ?>

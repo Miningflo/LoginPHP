@@ -19,6 +19,8 @@ username VARCHAR(30) NOT NULL,
 password VARCHAR(60) NOT NULL,
 activated BOOL NOT NULL,
 validate INT(5) NOT NULL,
+resetkey VARCHAR(128) NOT NULL,
+email VARCHAR(254) NOT NULL,
 time TIMESTAMP
 )";
 //$connection->query($sql);

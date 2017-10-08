@@ -6,10 +6,23 @@ $DBname = "logindb";
 $tablename = "users";
         
 $connection = new mysqli($servername,$username,$password,$DBname);
-$type = $_REQUEST["type"];
-$value = $_REQUEST["value"];
+$username = $_REQUEST["username"];
+$email = $_REQUEST["email"];
 
-$sql = "SELECT $type FROM $tablename WHERE $type = '$value'";
+$sql = "SELECT username FROM $tablename WHERE username = '$username'";
+
+$result = $connection->query($sql);
+
+if ($result->num_rows > 0)
+{
+    echo "false ";
+}
+else
+{
+    echo "true ";
+}
+
+$sql = "SELECT email FROM $tablename WHERE email = '$email'";
 
 $result = $connection->query($sql);
 
